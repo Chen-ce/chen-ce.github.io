@@ -1,0 +1,174 @@
+iconify-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  width: 1em;
+  height: 1em;
+}
+
+.vp-doc blockquote {
+  border-left: 2px solid #3b82f6;
+}
+
+/* 通用图片风格 */
+.vp-doc img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: var(--vp-shadow-1);
+  background: var(--vp-c-bg-soft);
+}
+
+.vp-doc figure {
+  margin: 16px auto;
+  text-align: center;
+  max-width: 100%; /* 默认不超屏 */
+}
+
+/* 图片基础样式 */
+.vp-doc figure img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: var(--vp-shadow-1);
+  background: var(--vp-c-bg-soft);
+}
+
+/* 大屏时缩小到 60% 并居中 */
+@media (min-width: 1200px) {
+  .vp-doc figure img.hero-shot {
+    width: min(60%, 960px);
+  }
+}
+
+/* 中屏时 80% */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .vp-doc figure img.hero-shot {
+    width: min(80%, 840px);
+  }
+}
+
+/* 小屏默认 100% */
+@media (max-width: 767px) {
+  .vp-doc figure img.hero-shot {
+    width: 100%;
+  }
+}
+
+/* 图注优化 */
+.vp-doc figure figcaption {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--vp-c-text-2);
+}
+
+/* 网格容器：大屏3列 / 中屏2列 / 小屏1列 */
+.vp-doc .shot-grid {
+  display: grid;
+  gap: 12px;
+  margin: 12px 0 16px;
+}
+
+/* ≥ 1200px 三列 */
+@media (min-width: 1200px) {
+  .vp-doc .shot-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* 768px～1199px 两列 */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .vp-doc .shot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* < 768px 一列（默认） */
+@media (max-width: 767px) {
+  .vp-doc .shot-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 大图（横幅/重点图）更强的阴影与圆角 */
+.vp-doc .hero-shot {
+  border-radius: 16px;
+  box-shadow: var(--vp-shadow-3);
+}
+
+/* 默认不强制裁剪，按图片原始比例展示 */
+.vp-doc .shot-grid img {
+  object-fit: contain;
+}
+
+/* 仅对竖屏手机截图使用固定比例（按需给图片加 .screenshot 类） */
+.vp-doc img.screenshot {
+  aspect-ratio: 9 / 19.5;
+  object-fit: contain;
+}
+
+/* 网格中的竖屏截图 */
+.vp-doc .shot-grid img.screenshot {
+  aspect-ratio: 9 / 19.5;
+  object-fit: contain;
+}
+
+
+/* 轻量放大预览（可选：为图片添加 .zoomable 类） */
+.vp-doc img.zoomable {
+  transition: transform .2s ease, box-shadow .2s ease;
+  cursor: zoom-in;
+}
+.vp-doc img.zoomable:hover {
+  transform: scale(1.02);
+  box-shadow: var(--vp-shadow-2);
+}
+
+/* 可选：让特定 Figure 在大屏更窄一些（为 figure 或容器添加 .narrow 类） */
+@media (min-width: 1200px) {
+  .vp-doc figure.narrow, .vp-doc .narrow {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 反馈表单容器：居中 + 最大宽度限制 */
+.feedback-embed {
+  width: 100%;
+  max-width: 960px;
+  margin: 16px auto 24px;
+}
+
+/* 响应式高度策略：
+ * - 移动端：占视口 75% 高度，最低 520px
+ * - 平板：占视口 75% 高度，最低 600px
+ * - 桌面大屏：固定 780px，更稳
+ */
+.feedback-embed iframe {
+  width: 100%;
+  height: 75vh;               /* 主高度：跟随视口 */
+  min-height: 520px;          /* 小屏兜底高度 */
+  border: 0;
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+  box-shadow: var(--vp-shadow-1);
+}
+
+@media (min-width: 768px) {
+  .feedback-embed iframe {
+    min-height: 600px;        /* 中屏兜底更高一点 */
+    box-shadow: var(--vp-shadow-2);
+  }
+}
+
+@media (min-width: 1280px) {
+  .feedback-embed iframe {
+    height: 780px;            /* 大屏采用固定高度，避免过高 */
+  }
+}
